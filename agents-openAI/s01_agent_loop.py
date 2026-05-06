@@ -82,9 +82,9 @@ def agent_loop(messages: list):
                 })
                 continue
 
-            print(f"\033[33m$ {command}\033[0m")
             output = run_bash(command)
-            print(output[:200])
+            print(f"\033[2m$ {command}\033[0m")
+            print(f"\033[2m{output[:200]}\033[0m")
             messages.append({
                 "role": "tool",
                 "tool_call_id": tool_call.id,
@@ -105,5 +105,5 @@ if __name__ == "__main__":
         agent_loop(history)
         response_content = history[-1]["content"]
         if isinstance(response_content, str) and response_content:
-            print(response_content)
+            print(f"\033[1m{response_content}\033[0m")
         print()
